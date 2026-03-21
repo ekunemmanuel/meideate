@@ -24,6 +24,7 @@
         "@milkdown/vue": "^7.19.0",
         "clsx": "^2.1.1",
         "convex-vue": "^0.1.5",
+        "idb": "^8.0.3",
         "markdown-it": "^14.1.1",
         "remark-directive": "^4.0.0",
         "tailwind-merge": "^3.5.0",
