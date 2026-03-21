@@ -1,0 +1,10 @@
+.env
+.env.local
+
+node_modules
+.turbo
+dist
+target
+src-tauri/target
+.auto
+.DS_Store

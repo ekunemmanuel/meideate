@@ -1,0 +1,54 @@
+@import "@meideate/ui/global.css";
+@import "uniwind";
+
+@theme {
+  --font-sans: "Urbanist-Regular";
+  --font-medium: "Urbanist-Medium";
+  --font-semibold: "Urbanist-SemiBold";
+  --font-bold: "Urbanist-Bold";
+  /* --font-extrabold: 'Urbanist-ExtraBold';
+  --font-black: */
+}
+
+@layer theme {
+  :root {
+    @variant dark {
+      /* Dark Mode Palette */
+      --color-background: #000000;
+      /* Inverted text colors for dark mode */
+      --color-foreground: #ffffff;
+      --color-muted: #1a1a1a;
+      --color-muted-foreground: #a0a0a0;
+      /* Lighter grey for visibility on black */
+
+      --color-primary: #ff568a;
+      --color-primary-foreground: #ffffff;
+
+      --color-accent: #2a2a2a;
+      --color-accent-foreground: #ffffff;
+
+      --color-card: #121212;
+      --color-border: #ffffff20;
+      /* White with low opacity */
+    }
+
+    @variant light {
+      /* Light Mode Palette (User Defined) */
+      --color-background: #ffffff;
+      --color-foreground: #202020;
+      /* Main Text */
+      --color-muted: #f4f4f4;
+      --color-muted-foreground: #7a7a7a;
+      /* Secondary Text */
+
+      --color-primary: #ff568a;
+      --color-primary-foreground: #ffffff;
+
+      --color-accent: #f8f9fa;
+      --color-accent-foreground: #202020;
+
+      --color-card: #ffffff;
+      --color-border: #00000017;
+    }
+  }
+}
