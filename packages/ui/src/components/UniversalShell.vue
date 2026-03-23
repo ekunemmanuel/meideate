@@ -211,45 +211,28 @@ const runSeed = async () => {
 // Sidebar Toggle
 const showSidebar = ref(true);
 
-// Desktop Notifications Poller
-const { data: allReminders } = useConvexQuery(api.reminders.listAll, {});
-const notifiedReminders = new Set<string>();
-let notificationInterval: ReturnType<typeof setInterval>;
+// Reminders Monitor
+import { useRemindersMonitor } from "../composables/useRemindersMonitor";
+useRemindersMonitor(workspaces, selectedWorkspaceId, showReminders);
 
-onMounted(() => {
-  if ("Notification" in window && Notification.permission !== "granted" && Notification.permission !== "denied") {
-    Notification.requestPermission();
-  }
+// Autostart Handling
+// Dynamic import to support web-only environments
 
-  notificationInterval = setInterval(() => {
-    if (!allReminders.value) return;
-    const now = Date.now();
-    for (const r of allReminders.value) {
-      if (r.isCompleted || !r.dueDate) continue;
-      const diff = r.dueDate - now;
-      const thresholds = [
-        { min: 120, ms: 120 * 60000, msg: "2 Hours Left! Get to work!" },
-        { min: 60, ms: 60 * 60000, msg: "1 Hour Left! Time is ticking!" },
-        { min: 30, ms: 30 * 60000, msg: "30 Mins Left! Focus!" },
-        { min: 15, ms: 15 * 60000, msg: "15 Mins Left! ALMOST OUT OF TIME!" }
-      ];
-      for (const t of thresholds) {
-        if (diff > 0 && diff <= t.ms) {
-          const key = `${r._id}-${t.min}`;
-          if (!notifiedReminders.has(key)) {
-            notifiedReminders.add(key);
-            if ("Notification" in window && Notification.permission === "granted") {
-              new Notification(`Due soon: ${r.task}`, { body: t.msg });
-            }
-          }
-        }
-      }
+onMounted(async () => {
+  // Autostart logic
+  if ((window as any).__TAURI__) {
+    try {
+      const { enable, isEnabled } = await import('@tauri-apps/plugin-autostart');
+      const enabled = await isEnabled();
+      if (!enabled) await enable();
+    } catch (err) {
+      console.error("[App] Failed to enable autostart:", err);
     }
-  }, 60000);
+  }
 });
 
 onUnmounted(() => {
-  if (notificationInterval) clearInterval(notificationInterval);
+  // Cleanup logic if needed (Set is cleared on creation)
 });
 
 

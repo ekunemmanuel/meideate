@@ -22,6 +22,7 @@
         "@milkdown/prose": "^7.19.0",
         "@milkdown/utils": "^7.19.0",
         "@milkdown/vue": "^7.19.0",
+        "@tauri-apps/plugin-autostart": "^2.5.1",
         "clsx": "^2.1.1",
         "convex-vue": "^0.1.5",
         "idb": "^8.0.3",

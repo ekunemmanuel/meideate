@@ -9,3 +9,4 @@ export { default as UniversalShell } from './components/UniversalShell.vue';
 
 export * from './plugins/audio';
 export * from './plugins/video';
+export * from './composables/useRemindersMonitor';
